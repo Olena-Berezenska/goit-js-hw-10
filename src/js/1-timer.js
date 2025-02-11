@@ -15,6 +15,7 @@ const timer = {
   selectData() {
     const options = {
       enableTime: true,
+      defaultDate: new Date(),
       time_24hr: true,
       minuteIncrement: 1,
       onClose(selectedDates) {
@@ -67,7 +68,6 @@ const timer = {
   },
   stop() {
     clearInterval(this.intervalId);
-    refs.StartBtn.disabled = false;
     refs.DateInput.disabled = false;
   },
 };

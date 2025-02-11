@@ -12,15 +12,13 @@ inputDelay.addEventListener('input', event => {
   console.log(delayValue);
 });
 
-function CreateNotyfication(delay) {
+function CreateNotyfication(delay, status) {
   const Options = new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (ratioFulfilled.checked) {
+      if (status === 'fulfilled') {
         resolve(delay);
-      } else if (ratioRejected.checked) {
-        reject(delay);
       } else {
-        reject('none');
+        reject(delay);
       }
     }, delay);
   });
@@ -29,7 +27,8 @@ function CreateNotyfication(delay) {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  CreateNotyfication(delayValue)
+  const status = ratioFulfilled.checked ? 'fulfilled' : 'rejected';
+  CreateNotyfication(delayValue, status)
     .then(delay => {
       iziToast.success({
         message: `✅ Fulfilled promise in ${delay}ms`,
